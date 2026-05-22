@@ -141,12 +141,14 @@ export function compressToTargetSize(
         return;
       }
 
-      // Binary search: find highest quality that keeps result ≤ target
+      // Binary search: find highest quality that keeps result ≤ target bytes
       let minQuality = 0.05;
       let maxQuality = 0.95;
-      // Track the best result that is UNDER or EQUAL to target
+
+      // Track best result(s).  We guarantee exactly ONE live blob URL at
+      // resolution time — any previous URLs are revoked before the next
+      // iteration creates a new one.
       let bestUnder: CompressResult | null = null;
-      // Also track the absolute smallest result (fallback if can't get under)
       let smallest: CompressResult | null = null;
 
       for (let attempt = 0; attempt < maxAttempts; attempt++) {
@@ -168,40 +170,42 @@ export function compressToTargetSize(
           url: URL.createObjectURL(blob),
         };
 
-        // Track smallest result overall (for when we can't reach target)
-        if (!smallest || blob.size < smallest.size) {
-          if (smallest) URL.revokeObjectURL(smallest.url);
-          smallest = result;
-        } else if (result !== smallest) {
-          URL.revokeObjectURL(result.url);
-        }
+        const isUnder = blob.size <= targetBytes;
 
-        if (blob.size <= targetBytes) {
-          // Under target — keep this and try higher quality
+        if (isUnder) {
+          // Revoke previous bestUnder (if any) before replacing
           if (bestUnder) URL.revokeObjectURL(bestUnder.url);
           bestUnder = result;
           minQuality = quality;
 
-          // Check if close enough to target
+          // Check tolerance
           const pctUnder = (targetBytes - blob.size) / targetBytes;
           if (pctUnder <= tolerance) {
             resolve(result);
             return;
           }
         } else {
-          // Over target — need lower quality
-          maxQuality = quality;
-          // Don't revoke if it's the same as bestUnder or smallest
-          if (result !== bestUnder && result !== smallest) {
+          // Over target — revoke this attempt's URL immediately
+          // (unless it also becomes smallest)
+          const isSmaller = !smallest || blob.size < smallest.size;
+          if (isSmaller) {
+            if (smallest) URL.revokeObjectURL(smallest.url);
+            smallest = result;
+          } else {
             URL.revokeObjectURL(result.url);
           }
+          maxQuality = quality;
         }
       }
 
+      // Resolve: bestUnder has a live URL.  If smallest != bestUnder,
+      // smallest also has a live URL that we must revoke.
       if (bestUnder) {
+        if (smallest && smallest !== bestUnder) {
+          URL.revokeObjectURL(smallest.url);
+        }
         resolve(bestUnder);
       } else if (smallest) {
-        // Even at lowest quality, still over target — return smallest possible
         resolve(smallest);
       } else {
         reject(new Error("Could not compress to target size"));
