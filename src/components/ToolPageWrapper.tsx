@@ -7,6 +7,7 @@ import {
   getToolMeta,
   getRelatedTools,
   generateBreadcrumbs,
+  siteUrl,
 } from "@/lib/seo";
 import {
   faqSchema,
@@ -38,7 +39,7 @@ export function generateToolMetadata(slug: string): Metadata {
       follow: true,
     },
     alternates: {
-      canonical: `https://pixelmint.com/tools/${slug}`,
+      canonical: `${siteUrl}/tools/${slug}`,
     },
   };
 }

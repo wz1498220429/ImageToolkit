@@ -1,3 +1,5 @@
+import { siteUrl } from "./seo";
+
 export interface FAQItem {
   question: string;
   answer: string;
@@ -42,7 +44,7 @@ export function breadcrumbSchema(items: BreadcrumbItem[]) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `https://pixelmint.com${item.url}`,
+      item: `${siteUrl}${item.url}`,
     })),
   };
 }
