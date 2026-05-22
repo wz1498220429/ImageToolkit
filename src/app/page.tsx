@@ -61,6 +61,13 @@ const featuredTools = [
     color: "bg-teal-100 text-teal-600",
   },
   {
+    title: "Color Picker",
+    description: "Pick colors from any image",
+    href: "/tools/image-color-picker",
+    icon: RefreshCw,
+    color: "bg-pink-100 text-pink-600",
+  },
+  {
     title: "Rotate Image",
     description: "Rotate and flip your images",
     href: "/tools/rotate-image",
