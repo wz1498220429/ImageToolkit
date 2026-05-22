@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-[var(--color-text)] antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@layer utilities {
+  .drop-zone {
+    @apply border-2 border-dashed border-[var(--color-border)] rounded-2xl p-8 text-center cursor-pointer transition-all duration-200;
+  }
+  .drop-zone:hover {
+    @apply border-[var(--color-primary-400)] bg-[var(--color-primary-50)];
+  }
+  .drop-zone.active {
+    @apply border-[var(--color-primary-500)] bg-[var(--color-primary-50)] shadow-lg;
+  }
+}

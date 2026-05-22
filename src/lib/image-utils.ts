@@ -1,0 +1,358 @@
+export interface CompressResult {
+  blob: Blob;
+  size: number;
+  sizeFormatted: string;
+  url: string;
+}
+
+export function formatFileSize(bytes: number): string {
+  if (bytes === 0) return "0 B";
+  const units = ["B", "KB", "MB", "GB"];
+  const k = 1024;
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + units[i];
+}
+
+export function loadImage(file: File): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Failed to load image"));
+    };
+    img.src = url;
+  });
+}
+
+export function canvasToBlob(
+  canvas: HTMLCanvasElement,
+  type: string,
+  quality: number
+): Promise<Blob | null> {
+  return new Promise((resolve) => {
+    canvas.toBlob(
+      (blob) => resolve(blob),
+      type,
+      quality
+    );
+  });
+}
+
+export function compressImage(
+  file: File,
+  quality: number,
+  outputType?: string
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+      ctx.drawImage(img, 0, 0);
+
+      const type = outputType || file.type;
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to compress image"));
+            return;
+          }
+          resolve({
+            blob,
+            size: blob.size,
+            sizeFormatted: formatFileSize(blob.size),
+            url: URL.createObjectURL(blob),
+          });
+        },
+        type,
+        quality
+      );
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function compressToTargetSize(
+  file: File,
+  targetBytes: number,
+  tolerance: number = 0.1,
+  maxAttempts: number = 20
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+
+      let minQuality = 0.01;
+      let maxQuality = 0.95;
+      let bestResult: CompressResult | null = null;
+
+      for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        const quality = (minQuality + maxQuality) / 2;
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) continue;
+        ctx.drawImage(img, 0, 0);
+
+        const blob = await canvasToBlob(canvas, file.type, quality);
+        if (!blob) continue;
+
+        const result: CompressResult = {
+          blob,
+          size: blob.size,
+          sizeFormatted: formatFileSize(blob.size),
+          url: URL.createObjectURL(blob),
+        };
+
+        if (!bestResult || Math.abs(blob.size - targetBytes) < Math.abs(bestResult.size - targetBytes)) {
+          // Revoke previous URL
+          if (bestResult) URL.revokeObjectURL(bestResult.url);
+          bestResult = result;
+        } else {
+          URL.revokeObjectURL(result.url);
+        }
+
+        const diff = blob.size - targetBytes;
+        const pctDiff = Math.abs(diff) / targetBytes;
+
+        if (pctDiff <= tolerance) {
+          resolve(result);
+          return;
+        }
+
+        if (blob.size > targetBytes) {
+          maxQuality = quality;
+        } else {
+          minQuality = quality;
+        }
+      }
+
+      if (bestResult) {
+        resolve(bestResult);
+      } else {
+        reject(new Error("Could not compress to target size"));
+      }
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function resizeImage(
+  file: File,
+  width: number,
+  height: number,
+  maintainAspect: boolean = true
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+
+      let newWidth = width;
+      let newHeight = height;
+
+      if (maintainAspect) {
+        const aspectRatio = img.width / img.height;
+        if (width && !height) {
+          newHeight = Math.round(width / aspectRatio);
+        } else if (height && !width) {
+          newWidth = Math.round(height * aspectRatio);
+        } else if (width && height) {
+          if (width / height > aspectRatio) {
+            newWidth = Math.round(height * aspectRatio);
+          } else {
+            newHeight = Math.round(width / aspectRatio);
+          }
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+      ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      if (!blob) {
+        reject(new Error("Failed to resize image"));
+        return;
+      }
+
+      resolve({
+        blob,
+        size: blob.size,
+        sizeFormatted: formatFileSize(blob.size),
+        url: URL.createObjectURL(blob),
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function convertImage(
+  file: File,
+  outputType: string
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+      ctx.drawImage(img, 0, 0);
+
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to convert image"));
+            return;
+          }
+          resolve({
+            blob,
+            size: blob.size,
+            sizeFormatted: formatFileSize(blob.size),
+            url: URL.createObjectURL(blob),
+          });
+        },
+        outputType,
+        0.92
+      );
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function cropImage(
+  file: File,
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+      ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
+
+      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      if (!blob) {
+        reject(new Error("Failed to crop image"));
+        return;
+      }
+
+      resolve({
+        blob,
+        size: blob.size,
+        sizeFormatted: formatFileSize(blob.size),
+        url: URL.createObjectURL(blob),
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function rotateImage(
+  file: File,
+  angle: number
+): Promise<CompressResult> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const img = await loadImage(file);
+      const canvas = document.createElement("canvas");
+
+      const radians = (angle * Math.PI) / 180;
+      const cos = Math.abs(Math.cos(radians));
+      const sin = Math.abs(Math.sin(radians));
+
+      canvas.width = Math.round(img.width * cos + img.height * sin);
+      canvas.height = Math.round(img.width * sin + img.height * cos);
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Failed to get canvas context"));
+        return;
+      }
+
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(radians);
+      ctx.drawImage(img, -img.width / 2, -img.height / 2);
+
+      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      if (!blob) {
+        reject(new Error("Failed to rotate image"));
+        return;
+      }
+
+      resolve({
+        blob,
+        size: blob.size,
+        sizeFormatted: formatFileSize(blob.size),
+        url: URL.createObjectURL(blob),
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export function heicToJpg(file: File): Promise<CompressResult> {
+  // For HEIC, we attempt to read it as image (browser may support it)
+  // Otherwise, we show an error
+  return convertImage(file, "image/jpeg");
+}
+
+export function getExtensionFromMime(mime: string): string {
+  const map: Record<string, string> = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+    "image/gif": ".gif",
+    "image/avif": ".avif",
+  };
+  return map[mime] || ".jpg";
+}
+
+export function downloadBlob(blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
