@@ -8,7 +8,7 @@ export interface ToolMeta {
 }
 
 export const siteName = "ImageToolkit";
-export const siteUrl = "https://imagetoolkit.com";
+export const siteUrl = "https://imagetoolkit.fit";
 export const siteDescription = "Free online image tools. Compress, convert, and resize images directly in your browser. No uploads, no sign-ups, 100% free.";
 
 export const tools: Record<string, ToolMeta> = {
