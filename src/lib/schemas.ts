@@ -237,3 +237,153 @@ export function rotateFAQ(): FAQItem[] {
     },
   ];
 }
+
+export function base64FAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I convert an image to Base64?",
+      answer: "Upload your image and the Base64 data URI will be generated instantly. Click the copy button to copy the Base64 string to your clipboard. All processing is done in your browser.",
+    },
+    {
+      question: "Is this Base64 converter free?",
+      answer: "Yes, converting images to Base64 is completely free. No sign-ups, no limits, no hidden costs.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All conversion happens locally in your browser. Your images never leave your device.",
+    },
+    {
+      question: "What is Base64 used for?",
+      answer: "Base64 is commonly used to embed images directly in HTML, CSS, or JavaScript code without needing separate image files. It's also used for data URIs and API transfers.",
+    },
+    {
+      question: "What image formats are supported?",
+      answer: "You can convert JPG, JPEG, PNG, WebP, and other common image formats to Base64.",
+    },
+  ];
+}
+
+export function base64DecodeFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I convert Base64 back to an image?",
+      answer: "Paste your Base64 string (with or without the data:image/... prefix) into the text area. The image will be decoded instantly and you can download it. All processing is done in your browser.",
+    },
+    {
+      question: "Is this Base64 decoder free?",
+      answer: "Yes, decoding Base64 to images is completely free. No registration required.",
+    },
+    {
+      question: "What format will the output image be?",
+      answer: "The output format is determined by the Base64 data. Common formats include PNG, JPEG, and WebP. The tool detects the format automatically.",
+    },
+    {
+      question: "Can I paste the full data URI?",
+      answer: "Yes, you can paste the full data URI including the 'data:image/...;base64,' prefix. The tool will automatically parse it.",
+    },
+    {
+      question: "Is my data secure?",
+      answer: "Yes. All Base64 decoding happens locally in your browser. Your data never leaves your device.",
+    },
+  ];
+}
+
+export function grayscaleFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I convert an image to grayscale?",
+      answer: "Upload your color image and click Convert. The image will be transformed to black and white instantly. Download the result or adjust settings and try again.",
+    },
+    {
+      question: "Is this grayscale converter free?",
+      answer: "Yes, converting images to grayscale is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does the image upload to a server?",
+      answer: "No. All grayscale conversion happens locally in your browser using canvas technology. Your images remain private.",
+    },
+    {
+      question: "What image formats are supported?",
+      answer: "You can convert JPG, JPEG, PNG, WebP, and other common image formats to grayscale.",
+    },
+    {
+      question: "Will I lose quality when converting to grayscale?",
+      answer: "No, grayscale conversion preserves the full resolution and quality of your original image, just removing the color information.",
+    },
+  ];
+}
+
+export function blurFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I blur an image?",
+      answer: "Upload your image and use the blur intensity slider to adjust the effect. Preview the result in real time and download when satisfied. All processing happens in your browser.",
+    },
+    {
+      question: "Is this image blur tool free?",
+      answer: "Yes, blurring images is completely free. No registration required.",
+    },
+    {
+      question: "Does the image upload to a server?",
+      answer: "No. All blur processing happens locally in your browser using canvas filters. Your images stay private.",
+    },
+    {
+      question: "What can I use image blurring for?",
+      answer: "Blur is commonly used to hide sensitive information (faces, license plates), create background effects, add depth of field, or for creative photo editing.",
+    },
+    {
+      question: "Can I adjust the blur strength?",
+      answer: "Yes, use the slider to control the blur intensity from a subtle soft focus to a strong blur effect.",
+    },
+  ];
+}
+
+export function flipFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I flip an image?",
+      answer: "Upload your image and click Flip Horizontally (mirror) or Flip Vertically. The flipped image is ready for download instantly. All processing happens in your browser.",
+    },
+    {
+      question: "Is this image flipper free?",
+      answer: "Yes, flipping images is completely free. No sign-ups, no limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All image flipping happens locally in your browser. Your images never leave your device.",
+    },
+    {
+      question: "What's the difference between flip and rotate?",
+      answer: "Flipping creates a mirror image (left becomes right), while rotating turns the image at an angle. Flipping horizontally is like looking in a mirror.",
+    },
+    {
+      question: "What image formats are supported?",
+      answer: "You can flip JPG, JPEG, PNG, WebP, and other common image formats.",
+    },
+  ];
+}
+
+export function pdfFAQ(from: string): FAQItem[] {
+  return [
+    {
+      question: `How do I convert ${from} to PDF?`,
+      answer: `Upload your ${from} image and click Convert to PDF. The PDF will be generated with your image on a single page. All processing is done in your browser.`,
+    },
+    {
+      question: "Is this PDF converter free?",
+      answer: "Yes, converting images to PDF is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: `No. All ${from} to PDF conversion happens locally using jsPDF in your browser. Your images never leave your device.`,
+    },
+    {
+      question: "What size will the PDF page be?",
+      answer: "The PDF page is set to A4 size with the image fitting to the page dimensions while maintaining its aspect ratio.",
+    },
+    {
+      question: "Can I add multiple images to one PDF?",
+      answer: "Currently, this tool converts one image per PDF. For multiple images, convert each one separately and combine them later.",
+    },
+  ];
+}

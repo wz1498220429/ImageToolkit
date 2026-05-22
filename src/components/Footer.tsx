@@ -5,12 +5,15 @@ const toolLinks = [
   { name: "Compress to 100KB", href: "/tools/compress-image-to-100kb" },
   { name: "Compress to 50KB", href: "/tools/compress-image-to-50kb" },
   { name: "WebP to PNG", href: "/tools/webp-to-png" },
+  { name: "Image to Base64", href: "/tools/image-to-base64" },
   { name: "PNG to JPG", href: "/tools/png-to-jpg" },
   { name: "PNG to WebP", href: "/tools/png-to-webp" },
   { name: "JPG to PNG", href: "/tools/jpg-to-png" },
+  { name: "Blur Image", href: "/tools/blur-image" },
   { name: "Resize Image", href: "/tools/resize-image" },
   { name: "Passport Photo", href: "/tools/passport-photo-maker" },
   { name: "Crop Image", href: "/tools/crop-image" },
+  { name: "Flip Image", href: "/tools/flip-image" },
 ];
 
 export default function Footer() {
