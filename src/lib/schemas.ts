@@ -187,3 +187,53 @@ export function passportPhotoFAQ(): FAQItem[] {
     },
   ];
 }
+
+export function cropFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I crop an image?",
+      answer: "Upload your image, drag to select the area you want to keep, and click Crop. You can use preset aspect ratios like 1:1, 4:3, or 16:9, or crop freely. All processing happens in your browser.",
+    },
+    {
+      question: "Is this image cropper free?",
+      answer: "Yes, cropping images is completely free. No sign-ups, no limits, no hidden costs.",
+    },
+    {
+      question: "Does my image upload to a server when cropping?",
+      answer: "No. All cropping happens locally in your browser. Your images never leave your device, ensuring complete privacy.",
+    },
+    {
+      question: "What aspect ratios are available?",
+      answer: "We support Free mode, 1:1 Square, 4:3, 3:2, 16:9, and 9:16. Select the preset that matches your needs or use Free to crop any way you want.",
+    },
+    {
+      question: "Can I move the crop selection after drawing it?",
+      answer: "Yes, simply click and drag inside the selection to reposition it. You can also cancel the selection and start over at any time.",
+    },
+  ];
+}
+
+export function rotateFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I rotate an image?",
+      answer: "Upload your image and click Rotate Left, Rotate Right, or Flip 180 degrees. The rotated image is ready for download instantly. All processing is done in your browser.",
+    },
+    {
+      question: "Is this image rotator free?",
+      answer: "Yes, rotating images is completely free. No registration, no limits, no payment required.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All rotation happens locally in your browser. Your images never leave your device, ensuring complete privacy and security.",
+    },
+    {
+      question: "What rotation options are available?",
+      answer: "You can rotate 90 degrees left (counter-clockwise), 90 degrees right (clockwise), or flip 180 degrees. These cover all common rotation needs.",
+    },
+    {
+      question: "What image formats are supported?",
+      answer: "You can rotate JPG, JPEG, PNG, WebP, and other common image formats. The output format matches the input format.",
+    },
+  ];
+}
