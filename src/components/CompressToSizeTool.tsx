@@ -45,14 +45,12 @@ export default function CompressToSizeTool({
     try {
       const res = await compressToTargetSize(file, targetKB * 1024);
       setResult(res);
-      if (res.size > targetKB * 1024) {
-        setError(
-          `Could not reach ${targetLabel}. Best result: ${res.sizeFormatted}. Try a smaller image or reduce dimensions first.`
-        );
-      }
-    } catch (err) {
+    } catch (err: any) {
+      const smallest = err.smallestFormatted;
       setError(
-        "Failed to compress to target size. Try a smaller image or reduce dimensions first."
+        smallest
+          ? `Could not reach ${targetLabel}. Smallest possible: ${smallest}. Try a smaller image or reduce dimensions first.`
+          : `Failed to compress to target size. Try a smaller image or reduce dimensions first.`
       );
     } finally {
       setLoading(false);

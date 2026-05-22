@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Blog | PixelMint",
+  title: "Blog | ImageToolkit",
   description:
     "Image optimization tips, guides, and best practices. Learn how to compress, convert, and optimize images for web and social media.",
 };
@@ -39,7 +39,7 @@ export default function BlogPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 pt-12 pb-16">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
-        PixelMint Blog
+        ImageToolkit Blog
       </h1>
       <p className="text-center text-[var(--color-text-muted)] mb-12 max-w-xl mx-auto">
         Tips, guides, and best practices for image optimization and processing.

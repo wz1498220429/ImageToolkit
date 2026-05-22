@@ -1,22 +1,22 @@
 export const metadata = {
-  title: "About | PixelMint",
+  title: "About | ImageToolkit",
   description:
-    "Learn about PixelMint - the free online image tools platform. All tools work directly in your browser with no uploads.",
+    "Learn about ImageToolkit - the free online image tools platform. All tools work directly in your browser with no uploads.",
 };
 
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 pt-12 pb-16 prose prose-gray">
-      <h1>About PixelMint</h1>
+      <h1>About ImageToolkit</h1>
       <p>
-        PixelMint is a collection of free, browser-based image tools designed to
+        ImageToolkit is a collection of free, browser-based image tools designed to
         help you compress, convert, resize, and edit your images quickly and
         securely.
       </p>
       <h2>Our Mission</h2>
       <p>
         We believe that image editing tools should be free, fast, and private.
-        That&apos;s why every tool on PixelMint processes your images entirely in your
+        That&apos;s why every tool on ImageToolkit processes your images entirely in your
         browser. Your files never leave your device.
         <br />
         No uploads.
@@ -24,13 +24,13 @@ export default function AboutPage() {
         No sign-ups.
         <br /> No limits.
       </p>
-      <h2>Why We Built PixelMint</h2>
+      <h2>Why We Built ImageToolkit</h2>
       <p>
         Most online image tools require you to upload your files to their
         servers, wait for processing, and then download the result. This is slow,
         insecure, and often comes with file size limits or paywalls.
         <br />
-        We built PixelMint to be different. Using modern browser technology, all
+        We built ImageToolkit to be different. Using modern browser technology, all
         processing happens locally on your device. It&apos;s faster, more private,
         and completely free.
       </p>

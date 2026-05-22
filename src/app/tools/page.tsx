@@ -34,7 +34,7 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export const metadata = {
-  title: "All Free Online Image Tools | PixelMint",
+  title: "All Free Online Image Tools | ImageToolkit",
   description:
     "Browse all free online image tools. Compress, convert, resize, crop, and edit images directly in your browser with no uploads.",
 };

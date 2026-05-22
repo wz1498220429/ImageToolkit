@@ -198,15 +198,22 @@ export function compressToTargetSize(
         }
       }
 
-      // Resolve: bestUnder has a live URL.  If smallest != bestUnder,
-      // smallest also has a live URL that we must revoke.
+      // Resolve: bestUnder has a live URL.
       if (bestUnder) {
         if (smallest && smallest !== bestUnder) {
           URL.revokeObjectURL(smallest.url);
         }
         resolve(bestUnder);
       } else if (smallest) {
-        resolve(smallest);
+        // Even at lowest quality, couldn't reach target — reject
+        const err = new Error(
+          `Could not reach target size. Smallest possible: ${smallest.sizeFormatted}. ` +
+          `Try a smaller image or reduce dimensions first.`
+        );
+        (err as any).smallestSize = smallest.size;
+        (err as any).smallestFormatted = smallest.sizeFormatted;
+        URL.revokeObjectURL(smallest.url);
+        reject(err);
       } else {
         reject(new Error("Could not compress to target size"));
       }

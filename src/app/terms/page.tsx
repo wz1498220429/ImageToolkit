@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Terms of Use | PixelMint",
+  title: "Terms of Use | ImageToolkit",
   description:
-    "PixelMint terms of use. Free online image tools that work in your browser with no uploads required.",
+    "ImageToolkit terms of use. Free online image tools that work in your browser with no uploads required.",
 };
 
 export default function TermsPage() {
@@ -11,17 +11,17 @@ export default function TermsPage() {
       <p><em>Last updated: May 2026</em></p>
       <h2>Acceptance of Terms</h2>
       <p>
-        By using PixelMint, you agree to these terms of use. If you do not agree,
+        By using ImageToolkit, you agree to these terms of use. If you do not agree,
         please do not use our services.
       </p>
       <h2>Use of Service</h2>
       <p>
-        PixelMint provides free online image tools for personal and commercial use.
+        ImageToolkit provides free online image tools for personal and commercial use.
         You agree to use these tools responsibly and not for any illegal purposes.
       </p>
       <h2>Intellectual Property</h2>
       <p>
-        PixelMint does not claim any ownership of the images you process using our
+        ImageToolkit does not claim any ownership of the images you process using our
         tools. Your images remain your property at all times.
       </p>
       <h2>Disclaimer</h2>
@@ -32,7 +32,7 @@ export default function TermsPage() {
       </p>
       <h2>Limitation of Liability</h2>
       <p>
-        PixelMint shall not be liable for any damages arising from the use or
+        ImageToolkit shall not be liable for any damages arising from the use or
         inability to use our tools.
       </p>
       <h2>Changes</h2>

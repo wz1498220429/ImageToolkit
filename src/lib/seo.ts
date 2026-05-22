@@ -7,7 +7,7 @@ export interface ToolMeta {
   category: "compress" | "convert" | "resize" | "photo";
 }
 
-export const siteName = "PixelMint";
+export const siteName = "ImageToolkit";
 export const siteUrl = "https://pixelmint.com";
 export const siteDescription = "Free online image tools. Compress, convert, and resize images directly in your browser. No uploads, no sign-ups, 100% free.";
 

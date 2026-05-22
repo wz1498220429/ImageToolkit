@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Privacy Policy | PixelMint",
+  title: "Privacy Policy | ImageToolkit",
   description:
-    "PixelMint privacy policy. We never upload your images to any server. All processing happens locally in your browser.",
+    "ImageToolkit privacy policy. We never upload your images to any server. All processing happens locally in your browser.",
 };
 
 export default function PrivacyPage() {
@@ -11,7 +11,7 @@ export default function PrivacyPage() {
       <p><em>Last updated: May 2026</em></p>
       <h2>Your Data Stays on Your Device</h2>
       <p>
-        PixelMint processes all images entirely in your browser. Your images are never uploaded to any server.
+        ImageToolkit processes all images entirely in your browser. Your images are never uploaded to any server.
         This means:
       </p>
       <ul>

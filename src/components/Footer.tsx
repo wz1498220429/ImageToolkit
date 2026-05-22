@@ -21,7 +21,7 @@ export default function Footer() {
               <div className="w-7 h-7 rounded-lg bg-[var(--color-primary-600)] flex items-center justify-center text-white font-bold text-xs">
                 P
               </div>
-              <span className="font-bold text-lg">PixelMint</span>
+              <span className="font-bold text-lg">ImageToolkit</span>
             </div>
             <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
               Free online image tools that work entirely in your browser.
@@ -99,7 +99,7 @@ export default function Footer() {
 
         <div className="border-t border-[var(--color-border)] mt-8 pt-8 text-center">
           <p className="text-sm text-[var(--color-text-muted)]">
-            &copy; {new Date().getFullYear()} PixelMint. All rights reserved.
+            &copy; {new Date().getFullYear()} ImageToolkit. All rights reserved.
           </p>
         </div>
       </div>

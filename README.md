@@ -1,4 +1,4 @@
-# PixelMint - Free Online Image Tools
+# ImageToolkit - Free Online Image Tools
 
 An SEO-optimized image tools website built with Next.js 15. All image processing happens in the browser — no uploads, no servers.
 

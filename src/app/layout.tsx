@@ -5,20 +5,20 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "PixelMint - Free Online Image Tools",
-    template: "%s | PixelMint",
+    default: "ImageToolkit - Free Online Image Tools",
+    template: "%s | ImageToolkit",
   },
   description: "Free online image tools. Compress, convert, resize, and edit images directly in your browser. No uploads, no sign-ups, 100% free.",
   keywords: ["image compressor", "image resizer", "webp converter", "png compressor", "passport photo maker", "free online tools"],
   openGraph: {
-    title: "PixelMint - Free Online Image Tools",
+    title: "ImageToolkit - Free Online Image Tools",
     description: "Compress, convert, resize, and edit images directly in your browser. No uploads, no sign-ups, 100% free.",
     type: "website",
-    siteName: "PixelMint",
+    siteName: "ImageToolkit",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PixelMint - Free Online Image Tools",
+    title: "ImageToolkit - Free Online Image Tools",
     description: "Compress, convert, resize, and edit images directly in your browser. No uploads, no sign-ups, 100% free.",
   },
   robots: {
