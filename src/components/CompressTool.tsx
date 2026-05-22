@@ -41,7 +41,11 @@ export default function CompressTool() {
     downloadBlob(result.blob, `${name}_compressed${ext}`);
   }, [result, file]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     URL.revokeObjectURL(originalUrl);
@@ -124,7 +128,8 @@ export default function CompressTool() {
           originalSize={formatFileSize(file.size)}
           compressedSize={result.sizeFormatted}
           onDownload={handleDownload}
-          onReset={handleReset}
+          onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
           originalName={file.name}
         />
       )}

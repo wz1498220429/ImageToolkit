@@ -60,7 +60,11 @@ export default function ConvertTool({
     downloadBlob(result.blob, `${name}${ext}`);
   }, [result, file, outputMime]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     URL.revokeObjectURL(originalUrl);
@@ -128,7 +132,8 @@ export default function ConvertTool({
           originalSize={formatFileSize(file.size)}
           compressedSize={result.sizeFormatted}
           onDownload={handleDownload}
-          onReset={handleReset}
+          onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
           originalName={file.name}
         />
       )}

@@ -64,7 +64,11 @@ export default function InstagramResizerTool() {
     downloadBlob(result.blob, `${name}_instagram${ext}`);
   }, [result, file]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     URL.revokeObjectURL(originalUrl);
@@ -147,7 +151,8 @@ export default function InstagramResizerTool() {
           originalSize={formatFileSize(file.size)}
           compressedSize={result.sizeFormatted}
           onDownload={handleDownload}
-          onReset={handleReset}
+          onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
           originalName={file.name}
         />
       )}

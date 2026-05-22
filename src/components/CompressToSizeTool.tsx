@@ -64,7 +64,11 @@ export default function CompressToSizeTool({
     downloadBlob(result.blob, `${name}_${targetLabel.replace(" ", "")}${ext}`);
   }, [result, file, targetLabel]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     setError(null);
@@ -138,7 +142,8 @@ export default function CompressToSizeTool({
             originalSize={formatFileSize(file.size)}
             compressedSize={result.sizeFormatted}
             onDownload={handleDownload}
-            onReset={handleReset}
+            onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
             originalName={file.name}
           />
           {error && (

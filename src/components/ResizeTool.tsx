@@ -78,7 +78,11 @@ export default function ResizeTool() {
     downloadBlob(result.blob, `${name}_${width}x${height}${ext}`);
   }, [result, file, width, height]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     URL.revokeObjectURL(originalUrl);
@@ -181,7 +185,8 @@ export default function ResizeTool() {
           originalSize={formatFileSize(file.size)}
           compressedSize={result.sizeFormatted}
           onDownload={handleDownload}
-          onReset={handleReset}
+          onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
           originalName={file.name}
         />
       )}

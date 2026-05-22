@@ -104,7 +104,11 @@ export default function PassportPhotoTool() {
     downloadBlob(result.blob, `${name}_passport.jpg`);
   }, [result, file]);
 
-  const handleReset = useCallback(() => {
+  const handleBackToSettings = useCallback(() => {
+    setResult(null);
+  }, []);
+
+  const handleRemoveImage = useCallback(() => {
     setResult(null);
     setFile(null);
     URL.revokeObjectURL(originalUrl);
@@ -200,7 +204,8 @@ export default function PassportPhotoTool() {
           originalSize={formatFileSize(file.size)}
           compressedSize={result.sizeFormatted}
           onDownload={handleDownload}
-          onReset={handleReset}
+          onBackToSettings={handleBackToSettings}
+          onRemoveImage={handleRemoveImage}
           originalName={file.name}
         />
       )}

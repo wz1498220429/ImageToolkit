@@ -1,13 +1,14 @@
 "use client";
 
-import { Download, RotateCw } from "lucide-react";
+import { Download, Sliders, Trash2 } from "lucide-react";
 
 interface ImagePreviewProps {
   src: string;
   originalSize: string;
   compressedSize: string;
   onDownload: () => void;
-  onReset: () => void;
+  onBackToSettings: () => void;
+  onRemoveImage: () => void;
   originalName: string;
 }
 
@@ -16,7 +17,8 @@ export default function ImagePreview({
   originalSize,
   compressedSize,
   onDownload,
-  onReset,
+  onBackToSettings,
+  onRemoveImage,
   originalName,
 }: ImagePreviewProps) {
   const saved = originalSize && compressedSize
@@ -71,11 +73,18 @@ export default function ImagePreview({
               Download
             </button>
             <button
-              onClick={onReset}
-              className="flex items-center justify-center gap-2 border border-[var(--color-border)] text-[var(--color-text)] px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors"
+              onClick={onBackToSettings}
+              className="flex items-center justify-center gap-2 border border-[var(--color-border)] text-[var(--color-text)] px-4 py-3 rounded-xl font-medium text-sm hover:bg-gray-50 transition-colors"
             >
-              <RotateCw className="w-5 h-5" />
-              Reset
+              <Sliders className="w-4 h-4" />
+              Adjust
+            </button>
+            <button
+              onClick={onRemoveImage}
+              className="flex items-center justify-center gap-2 border border-red-200 text-red-600 px-4 py-3 rounded-xl font-medium text-sm hover:bg-red-50 transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+              Remove
             </button>
           </div>
         </div>
