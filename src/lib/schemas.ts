@@ -389,3 +389,153 @@ export function pdfFAQ(from: string): FAQItem[] {
     },
   ];
 }
+
+export function colorPickerFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I pick a color from an image?",
+      answer: "Upload your image and click anywhere on it. The exact HEX, RGB, and HSL values of that pixel will be displayed instantly. You can copy any value with one click.",
+    },
+    {
+      question: "Is this color picker free?",
+      answer: "Yes, picking colors from images is completely free. No sign-ups, no limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All processing happens locally in your browser. Your images never leave your device.",
+    },
+    {
+      question: "What color formats are supported?",
+      answer: "The tool shows HEX, RGB, and HSL color values. You can copy any format by clicking the copy button next to each value.",
+    },
+    {
+      question: "What image formats can I pick colors from?",
+      answer: "You can pick colors from JPG, JPEG, PNG, WebP, and other common image formats.",
+    },
+  ];
+}
+
+export function watermarkFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I add a watermark to my image?",
+      answer: "Upload your image, enter your watermark text, and customize the opacity, size, and position. Click Add Watermark and download the result. All processing is done in your browser.",
+    },
+    {
+      question: "Is this watermark tool free?",
+      answer: "Yes, adding watermarks to images is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All watermark processing happens locally in your browser. Your images stay private.",
+    },
+    {
+      question: "Can I customize the watermark?",
+      answer: "Yes, you can change the watermark text, adjust opacity (10-100%), font size (12-72px), and choose from 5 positions: top-left, top-right, bottom-left, bottom-right, or center.",
+    },
+    {
+      question: "What image formats are supported?",
+      answer: "You can add watermarks to JPG, JPEG, PNG, WebP, and other common image formats.",
+    },
+  ];
+}
+
+export function mergeFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I merge two images?",
+      answer: "Upload two images and choose a merge mode: Side by Side (horizontal), Top to Bottom (vertical), or Overlay (semi-transparent). Click Merge Images to download the combined result.",
+    },
+    {
+      question: "Is this image merger free?",
+      answer: "Yes, merging images is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All merging happens locally in your browser using Canvas API. Your images never leave your device.",
+    },
+    {
+      question: "What merge modes are available?",
+      answer: "Three modes: Side by Side (images are placed next to each other horizontally), Top to Bottom (stacked vertically), and Overlay (images are blended together with 50% transparency).",
+    },
+    {
+      question: "What happens if the images have different sizes?",
+      answer: "In horizontal mode, the height matches the taller image. In vertical mode, the width matches the wider image. In overlay mode, the canvas fits the larger image dimensions.",
+    },
+  ];
+}
+
+export function imageToSvgFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I convert an image to SVG?",
+      answer: "Upload your image and the tool generates an SVG file with your image embedded. You can copy the SVG code or download the .svg file. All processing is done in your browser.",
+    },
+    {
+      question: "Is this image to SVG converter free?",
+      answer: "Yes, converting images to SVG is completely free. No sign-ups, no limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All conversion happens locally in your browser. Your images never leave your device.",
+    },
+    {
+      question: "What can I use the SVG code for?",
+      answer: "SVG code can be used directly in HTML, React components, or any web project. It's also compatible with design tools like Figma, Illustrator, and Inkscape.",
+    },
+    {
+      question: "What image formats can I convert to SVG?",
+      answer: "You can convert JPG, JPEG, PNG, WebP, and other common image formats to SVG.",
+    },
+  ];
+}
+
+export function splitImageFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I split an image into a grid?",
+      answer: "Upload your image, set the number of rows and columns (1-10 each), and click Split. The image will be divided into equal pieces. You can download each piece individually.",
+    },
+    {
+      question: "Is this image splitter free?",
+      answer: "Yes, splitting images is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All splitting happens locally in your browser. Your images never leave your device.",
+    },
+    {
+      question: "What is image splitting used for?",
+      answer: "Image splitting is commonly used for Instagram puzzle posts (split a single image into a 3x3 grid), creating tile maps, or dividing large images for easier processing.",
+    },
+    {
+      question: "Can I control the grid size?",
+      answer: "Yes, you can set custom rows and columns from 1 to 10. For example, a 3x3 grid creates 9 equal pieces, perfect for Instagram puzzle posts.",
+    },
+  ];
+}
+
+export function pixelateFAQ(): FAQItem[] {
+  return [
+    {
+      question: "How do I pixelate an image?",
+      answer: "Upload your image and adjust the pixel block size using the slider. Click Pixelate to apply the effect. You can adjust the intensity and try again. All processing is done in your browser.",
+    },
+    {
+      question: "Is this pixelation tool free?",
+      answer: "Yes, pixelating images is completely free. No sign-ups or limits.",
+    },
+    {
+      question: "Does my image upload to a server?",
+      answer: "No. All pixelation happens locally in your browser. Your images remain private.",
+    },
+    {
+      question: "What is pixelation used for?",
+      answer: "Pixelation is commonly used for censoring sensitive content (faces, license plates, text), creating pixel art effects, or adding privacy protection to photos.",
+    },
+    {
+      question: "Can I control the pixel block size?",
+      answer: "Yes, use the slider to adjust pixel size from 2px (subtle effect) to 40px (extreme pixelation). Preview the result and adjust as needed.",
+    },
+  ];
+}
