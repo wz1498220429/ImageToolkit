@@ -90,7 +90,7 @@ export default function BlogPost() {
         <p className="mb-4">Convert your JPG to PDF instantly:</p>
         <Link
           href="/tools/jpg-to-pdf"
-          className="inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors no-underline"
+          className="cta-btn inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors"
         >
           Convert JPG to PDF →
         </Link>

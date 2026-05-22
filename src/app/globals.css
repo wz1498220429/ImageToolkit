@@ -94,4 +94,13 @@
   .blog-article strong {
     font-weight: 600;
   }
+
+  /* Blog CTA buttons — keep text white, not blue */
+  .blog-article .cta-btn {
+    color: #fff !important;
+    text-decoration: none !important;
+  }
+  .blog-article .cta-btn:hover {
+    color: #fff !important;
+  }
 }

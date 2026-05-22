@@ -126,7 +126,7 @@ export default function BlogPost() {
           <p className="mb-4">Ready to compress your image? Use our tool directly:</p>
           <Link
             href="/tools/compress-image-to-100kb"
-            className="inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors no-underline"
+            className="cta-btn inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors"
           >
             Compress Image to 100KB →
           </Link>

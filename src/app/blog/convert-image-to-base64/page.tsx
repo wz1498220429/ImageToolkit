@@ -114,7 +114,7 @@ img.src = "data:image/png;base64,iVBORw0...";`}
         <p className="mb-4">Convert your image to Base64 instantly, no uploads needed:</p>
         <Link
           href="/tools/image-to-base64"
-          className="inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors no-underline"
+          className="cta-btn inline-flex items-center gap-2 bg-[var(--color-primary-600)] text-white px-6 py-3 rounded-xl font-medium hover:bg-[var(--color-primary-700)] transition-colors"
         >
           Convert Image to Base64 →
         </Link>
