@@ -96,6 +96,11 @@ export default function CompressToSizeTool({
               <p className="text-xs text-[var(--color-text-muted)]">
                 {formatFileSize(file.size)}
               </p>
+              {file.type === "image/png" && (
+                <p className="text-xs text-amber-600 mt-1">
+                  PNG will be converted to JPEG for compression
+                </p>
+              )}
             </div>
           </div>
 

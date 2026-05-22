@@ -43,6 +43,23 @@ export function canvasToBlob(
   });
 }
 
+/**
+ * Determine the output MIME type for lossy compression.
+ * - PNG → JPEG (because PNG ignores the quality parameter)
+ * - Everything else → keep original (JPEG/WebP both support quality)
+ */
+export function getCompressionMime(fileType: string): string {
+  // PNG's canvas.toBlob ignores the quality parameter — use JPEG instead
+  if (fileType === "image/png") {
+    return "image/jpeg";
+  }
+  // HEIC/HEIF can't be re-encoded by canvas as HEIC — fall back to JPEG
+  if (fileType === "image/heic" || fileType === "image/heif") {
+    return "image/jpeg";
+  }
+  return fileType;
+}
+
 export function compressImage(
   file: File,
   quality: number,
@@ -61,7 +78,8 @@ export function compressImage(
       }
       ctx.drawImage(img, 0, 0);
 
-      const type = outputType || file.type;
+      // Use a lossy output format so the quality slider actually works
+      const type = getCompressionMime(outputType || file.type);
 
       canvas.toBlob(
         (blob) => {
@@ -95,7 +113,35 @@ export function compressToTargetSize(
     try {
       const img = await loadImage(file);
 
-      let minQuality = 0.01;
+      // Use a lossy output format so quality adjustments actually change file size
+      const outputMime = getCompressionMime(file.type);
+
+      // First attempt at highest quality to get baseline
+      const firstBlob = await canvasToBlob(
+        (() => {
+          const c = document.createElement("canvas");
+          c.width = img.width;
+          c.height = img.height;
+          const ctx = c.getContext("2d");
+          if (ctx) ctx.drawImage(img, 0, 0);
+          return c;
+        })(),
+        outputMime,
+        0.95
+      );
+
+      if (firstBlob && firstBlob.size < targetBytes) {
+        // Already under target, return as-is
+        resolve({
+          blob: firstBlob,
+          size: firstBlob.size,
+          sizeFormatted: formatFileSize(firstBlob.size),
+          url: URL.createObjectURL(firstBlob),
+        });
+        return;
+      }
+
+      let minQuality = 0.05;
       let maxQuality = 0.95;
       let bestResult: CompressResult | null = null;
 
@@ -108,7 +154,7 @@ export function compressToTargetSize(
         if (!ctx) continue;
         ctx.drawImage(img, 0, 0);
 
-        const blob = await canvasToBlob(canvas, file.type, quality);
+        const blob = await canvasToBlob(canvas, outputMime, quality);
         if (!blob) continue;
 
         const result: CompressResult = {
@@ -119,7 +165,6 @@ export function compressToTargetSize(
         };
 
         if (!bestResult || Math.abs(blob.size - targetBytes) < Math.abs(bestResult.size - targetBytes)) {
-          // Revoke previous URL
           if (bestResult) URL.revokeObjectURL(bestResult.url);
           bestResult = result;
         } else {
@@ -190,7 +235,8 @@ export function resizeImage(
       }
       ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
-      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      const outputMime = getCompressionMime(file.type);
+      const blob = await canvasToBlob(canvas, outputMime, 0.92);
       if (!blob) {
         reject(new Error("Failed to resize image"));
         return;
@@ -267,7 +313,8 @@ export function cropImage(
       }
       ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
 
-      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      const outputMime = getCompressionMime(file.type);
+      const blob = await canvasToBlob(canvas, outputMime, 0.92);
       if (!blob) {
         reject(new Error("Failed to crop image"));
         return;
@@ -311,7 +358,8 @@ export function rotateImage(
       ctx.rotate(radians);
       ctx.drawImage(img, -img.width / 2, -img.height / 2);
 
-      const blob = await canvasToBlob(canvas, file.type, 0.92);
+      const outputMime = getCompressionMime(file.type);
+      const blob = await canvasToBlob(canvas, outputMime, 0.92);
       if (!blob) {
         reject(new Error("Failed to rotate image"));
         return;

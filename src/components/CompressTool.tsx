@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { Loader2, Sliders } from "lucide-react";
 import UploadZone from "./UploadZone";
 import ImagePreview from "./ImagePreview";
-import { compressImage, formatFileSize, downloadBlob, getExtensionFromMime } from "@/lib/image-utils";
+import { compressImage, formatFileSize, downloadBlob, getExtensionFromMime, getCompressionMime } from "@/lib/image-utils";
 import type { CompressResult } from "@/lib/image-utils";
 
 export default function CompressTool() {
@@ -69,6 +69,11 @@ export default function CompressTool() {
               <p className="text-xs text-[var(--color-text-muted)]">
                 {formatFileSize(file.size)}
               </p>
+              {file.type === "image/png" && (
+                <p className="text-xs text-amber-600 mt-1">
+                  PNG will be converted to JPEG for compression
+                </p>
+              )}
             </div>
           </div>
 
