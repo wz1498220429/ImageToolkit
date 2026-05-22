@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function BlogPost() {
   return (
-    <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 prose prose-gray">
+    <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 blog-article">
       <time className="text-sm text-[var(--color-text-muted)]">May 22, 2026</time>
       <h1>WebP vs PNG vs JPEG: Which Image Format Should You Use?</h1>
 

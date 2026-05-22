@@ -43,4 +43,55 @@
   .drop-zone.active {
     @apply border-[var(--color-primary-500)] bg-[var(--color-primary-50)] shadow-lg;
   }
+
+  /* Blog article links - make them clearly visible */
+  .blog-article a {
+    color: var(--color-primary-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .blog-article a:hover {
+    color: var(--color-primary-800);
+  }
+
+  /* Blog article heading spacing */
+  .blog-article h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .blog-article h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .blog-article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    color: #334155;
+  }
+  .blog-article ul,
+  .blog-article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .blog-article li {
+    margin-bottom: 0.25rem;
+    line-height: 1.75;
+    color: #334155;
+  }
+  .blog-article pre {
+    margin-bottom: 1rem;
+  }
+  .blog-article table {
+    margin-bottom: 1rem;
+  }
+  .blog-article strong {
+    font-weight: 600;
+  }
 }

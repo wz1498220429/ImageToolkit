@@ -32,7 +32,7 @@ export default function BlogPost() {
     <>
       <JsonLd data={faqSchema(faqItems)} />
 
-      <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 prose prose-gray">
+      <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 blog-article">
         <time className="text-sm text-[var(--color-text-muted)]">May 22, 2026</time>
         <h1>How to Compress Image to 100KB Online Free</h1>
 

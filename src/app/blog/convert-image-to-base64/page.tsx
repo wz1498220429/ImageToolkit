@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function BlogPost() {
   return (
-    <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 prose prose-gray">
+    <article className="max-w-3xl mx-auto px-4 pt-12 pb-16 blog-article">
       <time className="text-sm text-[var(--color-text-muted)]">May 22, 2026</time>
       <h1>How to Convert Image to Base64 Online Free</h1>
 
