@@ -141,9 +141,13 @@ export function compressToTargetSize(
         return;
       }
 
+      // Binary search: find highest quality that keeps result ≤ target
       let minQuality = 0.05;
       let maxQuality = 0.95;
-      let bestResult: CompressResult | null = null;
+      // Track the best result that is UNDER or EQUAL to target
+      let bestUnder: CompressResult | null = null;
+      // Also track the absolute smallest result (fallback if can't get under)
+      let smallest: CompressResult | null = null;
 
       for (let attempt = 0; attempt < maxAttempts; attempt++) {
         const quality = (minQuality + maxQuality) / 2;
@@ -164,30 +168,41 @@ export function compressToTargetSize(
           url: URL.createObjectURL(blob),
         };
 
-        if (!bestResult || Math.abs(blob.size - targetBytes) < Math.abs(bestResult.size - targetBytes)) {
-          if (bestResult) URL.revokeObjectURL(bestResult.url);
-          bestResult = result;
-        } else {
+        // Track smallest result overall (for when we can't reach target)
+        if (!smallest || blob.size < smallest.size) {
+          if (smallest) URL.revokeObjectURL(smallest.url);
+          smallest = result;
+        } else if (result !== smallest) {
           URL.revokeObjectURL(result.url);
         }
 
-        const diff = blob.size - targetBytes;
-        const pctDiff = Math.abs(diff) / targetBytes;
-
-        if (pctDiff <= tolerance) {
-          resolve(result);
-          return;
-        }
-
-        if (blob.size > targetBytes) {
-          maxQuality = quality;
-        } else {
+        if (blob.size <= targetBytes) {
+          // Under target — keep this and try higher quality
+          if (bestUnder) URL.revokeObjectURL(bestUnder.url);
+          bestUnder = result;
           minQuality = quality;
+
+          // Check if close enough to target
+          const pctUnder = (targetBytes - blob.size) / targetBytes;
+          if (pctUnder <= tolerance) {
+            resolve(result);
+            return;
+          }
+        } else {
+          // Over target — need lower quality
+          maxQuality = quality;
+          // Don't revoke if it's the same as bestUnder or smallest
+          if (result !== bestUnder && result !== smallest) {
+            URL.revokeObjectURL(result.url);
+          }
         }
       }
 
-      if (bestResult) {
-        resolve(bestResult);
+      if (bestUnder) {
+        resolve(bestUnder);
+      } else if (smallest) {
+        // Even at lowest quality, still over target — return smallest possible
+        resolve(smallest);
       } else {
         reject(new Error("Could not compress to target size"));
       }

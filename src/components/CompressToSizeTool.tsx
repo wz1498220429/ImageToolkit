@@ -45,10 +45,9 @@ export default function CompressToSizeTool({
     try {
       const res = await compressToTargetSize(file, targetKB * 1024);
       setResult(res);
-      const finalKB = Math.round(res.size / 1024);
-      if (finalKB > targetKB) {
+      if (res.size > targetKB * 1024) {
         setError(
-          `Could not reach exactly ${targetLabel}. Best result: ${res.sizeFormatted}. Try a smaller image.`
+          `Could not reach ${targetLabel}. Best result: ${res.sizeFormatted}. Try a smaller image or reduce dimensions first.`
         );
       }
     } catch (err) {
