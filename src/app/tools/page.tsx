@@ -24,6 +24,8 @@ const iconMap: Record<string, LucideIcon> = {
   "compress-png": Shrink,
   "webp-to-png": RefreshCw,
   "png-to-webp": FileImage,
+  "png-to-jpg": RefreshCw,
+  "jpg-to-png": RefreshCw,
   "heic-to-jpg": RefreshCw,
   "avif-to-jpg": RefreshCw,
   "resize-image": Ruler,
@@ -55,7 +57,7 @@ const categories = [
   },
   {
     name: "Image Conversion",
-    slugs: ["webp-to-png", "png-to-webp", "heic-to-jpg", "avif-to-jpg"],
+    slugs: ["webp-to-png", "png-to-webp", "png-to-jpg", "jpg-to-png", "heic-to-jpg", "avif-to-jpg"],
   },
   {
     name: "Image Editing",

@@ -108,6 +108,22 @@ export const tools: Record<string, ToolMeta> = {
     keywords: ["avif to jpg", "convert avif to jpg", "avif to jpeg", "avif converter", "change avif to jpg"],
     category: "convert",
   },
+  "png-to-jpg": {
+    slug: "png-to-jpg",
+    title: "Convert PNG to JPG Online Free - PNG to JPEG Converter",
+    description: "Free online PNG to JPG converter. Convert PNG images to JPEG format. Reduce file size while maintaining quality. Works in your browser, no uploads.",
+    h1: "Convert PNG to JPG Online Free",
+    keywords: ["png to jpg", "convert png to jpg", "png to jpeg", "png converter", "change png to jpg"],
+    category: "convert",
+  },
+  "jpg-to-png": {
+    slug: "jpg-to-png",
+    title: "Convert JPG to PNG Online Free - JPEG to PNG Converter",
+    description: "Free online JPG to PNG converter. Convert JPEG images to PNG format with transparency support. Browser-based, no uploads. Fast and free.",
+    h1: "Convert JPG to PNG Online Free",
+    keywords: ["jpg to png", "convert jpg to png", "jpeg to png", "jpg converter", "change jpg to png"],
+    category: "convert",
+  },
   "resize-image": {
     slug: "resize-image",
     title: "Resize Image Online Free - Change Image Dimensions",

@@ -94,6 +94,8 @@ const compressTargetTools = [
 const convertTools = [
   { from: "WebP", to: "PNG", href: "/tools/webp-to-png" },
   { from: "PNG", to: "WebP", href: "/tools/png-to-webp" },
+  { from: "PNG", to: "JPG", href: "/tools/png-to-jpg" },
+  { from: "JPG", to: "PNG", href: "/tools/jpg-to-png" },
   { from: "HEIC", to: "JPG", href: "/tools/heic-to-jpg" },
   { from: "AVIF", to: "JPG", href: "/tools/avif-to-jpg" },
 ];
