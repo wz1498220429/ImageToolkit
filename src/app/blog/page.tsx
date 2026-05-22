@@ -47,6 +47,34 @@ const posts = [
     slug: "convert-image-to-base64",
     tags: ["base64", "developer"],
   },
+  {
+    title: "How to Compress Image to 50KB Online Free",
+    excerpt: "Compress images to 50KB or less for passport photos, ID cards, and application forms. Step-by-step guide with free online tool.",
+    date: "May 22, 2026",
+    slug: "how-to-compress-image-to-50kb",
+    tags: ["compression", "guide"],
+  },
+  {
+    title: "How to Convert PNG to WebP — Reduce Image Size Without Losing Quality",
+    excerpt: "Convert PNG to WebP and reduce file size by 30%+ while preserving transparency. Complete guide with free browser-based converter.",
+    date: "May 22, 2026",
+    slug: "convert-png-to-webp-guide",
+    tags: ["webp", "converter", "guide"],
+  },
+  {
+    title: "Instagram Image Size Guide 2026 — Perfect Photo Dimensions",
+    excerpt: "Complete Instagram image size guide for feed posts, stories, reels, and profile photos. Free resizer tool included.",
+    date: "May 22, 2026",
+    slug: "instagram-image-size-guide",
+    tags: ["instagram", "social media", "guide"],
+  },
+  {
+    title: "Image Optimization for Web Performance — Complete Guide 2026",
+    excerpt: "Learn how to optimize images for faster websites. Compress, convert to WebP, resize, and lazy load. Free tools for every step.",
+    date: "May 22, 2026",
+    slug: "image-optimization-for-web",
+    tags: ["optimization", "performance", "web"],
+  },
 ];
 
 export default function BlogPage() {
