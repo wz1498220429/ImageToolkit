@@ -107,8 +107,13 @@ export default function CropTool() {
       const dy = e.clientY - rect.top;
       const img = toImg(dx, dy);
 
-      // If an existing selection exists, check if click is inside it → move mode
-      if (sel.w > 0 && sel.h > 0) {
+      // If selection covers the entire image (e.g. just switched to Free),
+      // treat click as drawing a new selection, not moving.
+      const fullSel =
+        sel.x === 0 && sel.y === 0 && sel.w === imgDims.w && sel.h === imgDims.h;
+
+      // If an existing selection exists (not full-image), check if click is inside → move
+      if (!fullSel && sel.w > 0 && sel.h > 0) {
         if (
           img.x >= sel.x &&
           img.x <= sel.x + sel.w &&
@@ -198,10 +203,8 @@ export default function CropTool() {
           w = h * ar;
         }
         setSel({ ...sel, w: Math.max(1, w), h: Math.max(1, h) });
-      } else if (ar === 0) {
-        // Free: reset to full image
-        setSel({ x: 0, y: 0, w: imgDims.w, h: imgDims.h });
       }
+      // Free mode (ar === 0): don't touch the selection, keep whatever the user drew
     },
     [sel, imgDims]
   );
@@ -209,10 +212,8 @@ export default function CropTool() {
   // ── cancel selection ─────────────────────────────────
 
   const handleCancel = useCallback(() => {
-    if (imgDims.w > 0) {
-      setSel({ x: 0, y: 0, w: imgDims.w, h: imgDims.h });
-    }
-  }, [imgDims]);
+    setSel({ x: 0, y: 0, w: 0, h: 0 });
+  }, []);
 
   // ── crop action ──────────────────────────────────────
 
